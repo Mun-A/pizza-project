@@ -1,9 +1,35 @@
+import { useCallback, useRef } from "react";
 import { useContext } from "react";
 import { SearchContext } from "../../App";
+import debounce from "lodash.debounce";
+
 import styles from "./Search.module.scss";
+import { useState } from "react";
 
 const Search = () => {
-  const { searchValue, setSearchValue } = useContext(SearchContext);
+  const [value, setValue] = useState("");
+  const { setSearchValue } = useContext(SearchContext);
+
+  const inputRef = useRef();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const updateSearchValue = useCallback(
+    debounce((str) => {
+      setSearchValue(str);
+    }, 500),
+    []
+  );
+
+  const onChangeInput = (e) => {
+    setValue(e.target.value);
+    updateSearchValue(e.target.value);
+  };
+
+  const onClickClear = () => {
+    setSearchValue("");
+    setValue("");
+    inputRef.current.focus();
+  };
 
   return (
     <div className={styles.root}>
@@ -17,14 +43,15 @@ const Search = () => {
         </g>
       </svg>
       <input
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        ref={inputRef}
+        value={value}
+        onChange={onChangeInput}
         className={styles.input}
         placeholder="Поиск пиццы ..."
       />
-      {searchValue && (
+      {value && (
         <svg
-          onClick={() => setSearchValue("")}
+          onClick={onClickClear}
           className={styles.clearIcon}
           height="512px"
           id="Layer_1"
