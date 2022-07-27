@@ -4,8 +4,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-const PizzaDetail = () => {
-  const [pizza, setPizza] = useState();
+const PizzaDetail: React.FC = () => {
+  const [pizza, setPizza] = useState<{
+    imageUrl: string;
+    title: string;
+    price: number;
+  }>();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -26,7 +30,7 @@ const PizzaDetail = () => {
   }, []);
 
   if (!pizza) {
-    return "Загрузка...";
+    return <p>Загрузка...</p>;
   }
 
   return (
