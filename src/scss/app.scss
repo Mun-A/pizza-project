@@ -50,6 +50,7 @@ body {
   &__items {
     display: grid;
     justify-items: center;
+    justify-content: center;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
   }
