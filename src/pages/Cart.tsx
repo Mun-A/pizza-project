@@ -4,10 +4,16 @@ import CartItem from "../components/CartItem";
 import CartEmpty from "../components/CartEmpty";
 import { selectCart } from "../redux/cart/selectors";
 import { clearItems } from "../redux/cart/slice";
+import { selectFilter } from "../redux/filter/selectors";
+import { useState } from "react";
+import { CartItem as CartItemType } from "../redux/cart/types";
+import { CartPagination } from '../components';
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const { totalPrice, items } = useSelector(selectCart);
+  const [currentItems, setCurrentItems] = useState<CartItemType[] | null>(null);
+  const { currentPage } = useSelector(selectFilter);
   const totalCount = items.reduce(
     (sum: number, item: any) => item.count + sum,
     0
@@ -101,9 +107,10 @@ const Cart: React.FC = () => {
           </button>
         </div>
         <div className="content__items">
-          {items.map((item, idx) => (
-            <CartItem key={item.id + idx} {...item} />
-          ))}
+          {currentItems &&
+            currentItems.map((item, idx) => (
+              <CartItem key={item.id + idx} {...item} />
+            ))}
         </div>
         <div className="cart__bottom">
           <div className="cart__bottom-details">
@@ -145,6 +152,11 @@ const Cart: React.FC = () => {
           </div>
         </div>
       </div>
+      <CartPagination
+        items={items}
+        setCurrentItems={setCurrentItems}
+        currentPage={currentPage}
+      />
     </div>
   );
 };

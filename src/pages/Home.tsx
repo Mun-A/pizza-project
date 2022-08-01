@@ -8,7 +8,7 @@ import {
   Sort,
   PizzaBlock,
   Skeleton,
-  Pagination,
+  HomePagination,
 } from "../components";
 import { sortList } from "../components/Sort";
 
@@ -131,7 +131,7 @@ const Home: React.FC = () => {
         </div>
       )}
 
-      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+      <HomePagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );
 };
