@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { PizzaLoader } from "../components";
 
 const PizzaDetail: React.FC = () => {
   const [pizza, setPizza] = useState<{
@@ -30,7 +31,7 @@ const PizzaDetail: React.FC = () => {
   }, []);
 
   if (!pizza) {
-    return <p>Загрузка...</p>;
+    return <PizzaLoader />;
   }
 
   return (

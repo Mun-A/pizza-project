@@ -7,3 +7,4 @@ export { default as CartPagination } from "./Pagination/CartPagination";
 export { default as PizzaBlock } from "./PizzaBlock/index";
 export { default as Skeleton } from "./PizzaBlock/Skeleton";
 export { default as Search } from "./Search/index";
+export { default as PizzaLoader } from "./PizzaLoader/index";

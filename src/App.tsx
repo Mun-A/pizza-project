@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import MainLayout from "./layouts/MainLayout";
 
 import "./scss/app.scss";
+import { PizzaLoader } from './components';
 
 const Cart = lazy(() => import(/* webpackChunkName: "Cart" */"./pages/Cart"));
 const PizzaDetail = lazy(() => import(/* webpackChunkName: "PizzaDetail" */"./pages/PizzaDetail"));
@@ -18,7 +19,7 @@ function App() {
         <Route
           path="/cart"
           element={
-            <Suspense fallback={<div>Идёт загрузка корзины...</div>}>
+            <Suspense fallback={<PizzaLoader/>}>
               <Cart />
             </Suspense>
           }
@@ -26,7 +27,7 @@ function App() {
         <Route
           path="/pizza/:id"
           element={
-            <Suspense fallback={<div>Идёт загрузка пиццы...</div>}>
+            <Suspense fallback={<PizzaLoader/>}>
               <PizzaDetail />
             </Suspense>
           }
@@ -34,7 +35,7 @@ function App() {
         <Route
           path="*"
           element={
-            <Suspense fallback={<div>Идёт загрузка...</div>}>
+            <Suspense fallback={<PizzaLoader/>}>
               <NotFound />
             </Suspense>
           }
