@@ -29,5 +29,9 @@
           color: #fff;
         }
       }
+      .previous a:hover, .next a:hover {
+        background-color: inherit;
+        color: #fe5f1e;
+      }
   }
 }

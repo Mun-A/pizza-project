@@ -16,12 +16,13 @@ const CartPagination: React.FC<CartPaginationProps> = ({
   setCurrentItems
 }) => {
   const [itemOffset, setItemOffset] = useState(0);
-  const [pageCount, setPageCount] = useState(0);
+  const [pageCount, setPageCount] = useState(Math.ceil(items.length / 5));
 
   useEffect(() => {
     const endOffset = itemOffset + 5;
     setCurrentItems(items.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(items.length / 5));
+    
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemOffset, items]);
 
@@ -38,7 +39,7 @@ const CartPagination: React.FC<CartPaginationProps> = ({
       onPageChange={onChangePage}
       pageRangeDisplayed={4}
       pageCount={pageCount}
-      forcePage={currentPage - 1}
+      // forcePage={currentPage - 1}
       previousLabel="<"
     />
   );
