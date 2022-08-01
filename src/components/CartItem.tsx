@@ -24,16 +24,16 @@ const CartItemBlock: React.FC<CartItemProps> = ({
   const dispatch = useDispatch();
 
   const onClickIncrease = () => {
-    dispatch(addItem({ id } as CartItem));
+    dispatch(addItem({ id, type, size } as CartItem));
   };
 
   const onClickDecrease = () => {
-    dispatch(decreaseItem(id));
+    dispatch(decreaseItem({ id, type, size } as CartItem));
   };
 
-  const onClickRemove = () => {
+  const onClickRemove = () => {    
     if (window.confirm(`Вы действительно хотите удалить пиццу "${title}"?`)) {
-      dispatch(removeItem(id));
+      dispatch(removeItem({ id, type, size } as CartItem));
     }
   };
 
